@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cache xmlns="http://maven.apache.org/BUILD-CACHE-CONFIG/1.0.0"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://maven.apache.org/BUILD-CACHE-CONFIG/1.0.0 https://maven.apache.org/xsd/build-cache-config-1.0.0.xsd">
+    <configuration>
+        <enabled>true</enabled>
+        <hashAlgorithm>XX</hashAlgorithm>
+        <local>
+            <maxBuildsCached>10</maxBuildsCached>
+        </local>
+        <attachedOutputs>
+            <dirNames>
+                <dirName>classes</dirName>
+                <dirName>generated-sources</dirName>
+                <dirName>generated-resources</dirName>
+                <dirName>generated-test-sources</dirName>
+                <dirName>maven-archiver</dirName>
+                <dirName>test-classes</dirName>
+                <dirName>maven-status</dirName>
+                <dirName>webpack-modules</dirName>
+            </dirNames>
+        </attachedOutputs>
+    </configuration>
+
+    <input>
+        <global>
+            <glob>
+                {*.java,*.groovy,*.yaml,*.svcd,*.proto,*.xml,*.vm,*.ini,*.jks,*.properties,*.sh,*.bat,*.jsx,*.scss,*.html,*.js,*.css,*.sql}
+            </glob>
+            <includes>
+                <include>src/</include>
+            </includes>
+        </global>
+    </input>
+
+    <executionControl>
+        <runAlways>
+            <plugins>
+                <plugin groupId="org.apache.openjpa" artifactId="openjpa-maven-plugin"/>
+            </plugins>
+        </runAlways>
+        <reconcile>
+            <plugins>
+                <plugin artifactId="maven-surefire-plugin" goal="test">
+                    <reconciles>
+                        <reconcile propertyName="skip" skipValue="true"/>
+                        <reconcile propertyName="skipExec" skipValue="true"/>
+                        <reconcile propertyName="skipTests" skipValue="true"/>
+                        <reconcile propertyName="testFailureIgnore" skipValue="true"/>
+                    </reconciles>
+                </plugin>
+                <plugin artifactId="maven-failsafe-plugin" goal="test">
+                    <reconciles>
+                        <reconcile propertyName="skip" skipValue="true"/>
+                        <reconcile propertyName="skipExec" skipValue="true"/>
+                        <reconcile propertyName="skipTests" skipValue="true"/>
+                        <reconcile propertyName="testFailureIgnore" skipValue="true"/>
+                    </reconciles>
+                </plugin>
+            </plugins>
+        </reconcile>
+    </executionControl>
+</cache>
