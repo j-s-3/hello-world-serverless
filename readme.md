@@ -41,3 +41,22 @@ container so that we can build on any OS. If you are running on a linux environm
 `docker rm tmp_container`
 
 Create AWS Lambda zip: `mvn assembly:assembly`
+
+# Deploying to AWS Lambda
+
+- Create a function
+- Give it a name (e.g. helloworld-test)
+- Choose 'Amazon Linux 2023' as the runtime (custom runtime)
+- x86_64 architecture
+- Create Function
+- Upload from Zip (choose zip created by mvn assembly)
+- Set request handler to `org.springframework.cloud.function.adapter.aws.FunctionInvoker::handleRequest`
+
+
+# To change the function handler name (console)
+
+- Open the Functions page of the Lambda console and choose your function.
+- Choose the Code tab.
+- Scroll down to the Runtime settings pane and choose Edit.
+- In Handler, enter the new name for your function handler.
+- Choose Save.
